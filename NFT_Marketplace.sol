@@ -21,7 +21,7 @@ contract NFTMarketplace is ERC721URIStorage {
     } 
 
     struct ListedToken {
-        uint256 tokenaId;
+        uint256 tokenId;
         address payable owner;
         address payable seller;
         uint256 price;
@@ -52,12 +52,12 @@ contract NFTMarketplace is ERC721URIStorage {
         return _tokenIds.current();
     }
 
-    function createToken(string emmory tokenURI, uint price) public payable returns(uint) {
+    function createToken(string memory tokenURI, uint price) public payable returns(uint) {
         require(msg.value == listPrice, "Send enough ether to list");
         require(price > 0, "Make sure the price isn't negative");
 
         tokenIds.increment();
-        uint256 currentTokenId = _tokenIds.current();
+        uint currentTokenId = _tokenIds.current();
         _safeMint(msg.sender, currentTokenId);
         _setTokenURI(currentTokenId, tokenURI);
         createListedToken(currentTokenId, price);
