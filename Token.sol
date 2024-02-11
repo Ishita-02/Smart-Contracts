@@ -7,9 +7,9 @@ contract Token {
     uint8 public decimals;
     uint256 public totalSupply;
 
-    mapping(address => uint256) public balance;
+    mapping(address => uint256) public balanceOf;
 
-    event(address indexed to, address indexed from, uint256 amount);
+    event Transfer (address indexed to, address indexed from, uint256 amount);
 
     constructor(string memory _name, string memory _symbol, uint8 _decimals, uint256 _initialSupply) {
         name = _name;
@@ -26,7 +26,7 @@ contract Token {
         balanceOf[msg.sender] -= _value;
         balanceOf[_to] += _value;
 
-        emit(_to, msg.sender, _value);
+        emit Transfer (_to, msg.sender, _value);
         return true; 
     }
 
