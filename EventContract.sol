@@ -30,7 +30,7 @@ contract EventContract {
 
         Event storage _event = events[eventId];
         require(msg.value == (_event.price*ticketCount), " Amount not sufficient");
-        require( _event.ticketRemain > = ticketCount, "Ticket count is not enough");
+        require( _event.ticketRemain >= ticketCount, "Ticket count is not enough");
         _event.ticketRemain -= ticketCount;
         tickets[msg.sender][eventId] += ticketCount;
     }    

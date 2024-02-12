@@ -20,6 +20,7 @@ contract VotingContract {
 
     modifier onlyAdmin() {
         require(msg.sender == admin, "Only admin can perform this action.");
+        _;
     }
 
     constructor() {
@@ -42,7 +43,7 @@ contract VotingContract {
     function castVote(uint _ballotId, uint _optionId) external {
         require( registeredVoters[msg.sender], "Voter is not registered.");
         require( ballots[_ballotId].isOpen, "Voting for this ballot is closed now." );
-        require( !hasVotes[msg.sender][_ballotId], "Sender has already voted for this." );
+        require( !hasVoted[msg.sender][_ballotId], "Sender has already voted for this." );
 
         ballots[_ballotId].votes[_optionId]++;
         hasVoted[msg.sender][_ballotId] = true;

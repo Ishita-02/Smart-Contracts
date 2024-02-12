@@ -14,9 +14,9 @@ contract NFTMarketplace is ERC721URIStorage {
     Counters.Counter private _tokenIds;
     Counters.Counter private _itemsSold;
 
-    uint 256 listPrice = 0.01 ether;
+    uint256 listPrice = 0.01 ether;
 
-    constructor() ERC721("NFTMarketplace, "NFTH") {
+    constructor() ERC721("NFTMarketplace", "NFTH") {
         owner = payable(msg.sender);
     } 
 
@@ -71,9 +71,9 @@ contract NFTMarketplace is ERC721URIStorage {
             payable(msg.sender),
             price,
             true
-        )
+        );
 
-        _transfer(msg.sender, address(this), tokenId);
+        Transfer(msg.sender, address(this), tokenId);
     }
 
     function getAllNFTs() public view returns(ListedToken[] memory) {
